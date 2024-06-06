@@ -16,6 +16,9 @@ public class Application {
 
 		//Read in file
 		FileReader readInitial = new FileReader();
+		Inventory inventory = new Inventory();
+
+
         try {
             readInitial.readInventoryFile();
         } catch (FileNotFoundException e) {
