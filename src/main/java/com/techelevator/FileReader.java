@@ -2,14 +2,17 @@ package com.techelevator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 public class FileReader{
 
-    public void readInventoryFile() throws FileNotFoundException {
+    public Map<String, ItemClass> readInventoryFile() throws FileNotFoundException {
 
-        File inventoryFile = new File("C:\\Users\\Student\\workspace\\Module1MiniCapstone\\m-1-capstone-team-0\\vendingmachine.csv");
-        Inventory inventory = new Inventory();
+        Map<String, ItemClass> map = new TreeMap<>();
+        File inventoryFile = new File("vendingmachine.csv");
+
 
         try(Scanner fileScanner = new Scanner(inventoryFile)){
             while (fileScanner.hasNextLine()){
@@ -23,7 +26,7 @@ public class FileReader{
                 for (int i = 0; i < lineItem.length; i++) {
                     if (lineItem[3].equalsIgnoreCase("chip")){
                         ItemClass chips = new ChipsClass(lineItem[0],lineItem[1],Double.parseDouble(lineItem[2]),lineItem[3]);
-                        inventory.addItemToInventory(lineItem[1],chips);
+                        map.put(lineItem[0], chips);
                     }
                     else if (lineItem[3].equalsIgnoreCase("gum")){
                         ItemClass gum = new GumClass(lineItem[0],lineItem[1],Double.parseDouble(lineItem[2]),lineItem[3]);
@@ -37,15 +40,13 @@ public class FileReader{
                         ItemClass drink = new BeveragesClass(lineItem[0],lineItem[1],Double.parseDouble(lineItem[2]),lineItem[3]);
                         inventory.addItemToInventory(lineItem[1],drink);
                     }
-                }{
-
-
-
-//                    if
-                    //populate based on line read using constructor
-
                 }
+//                    if
+                //populate based on line read using constructor
+
+
             }
+            return inventory;
         } catch (Exception e){
             throw new FileNotFoundException();
         }

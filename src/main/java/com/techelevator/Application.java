@@ -1,6 +1,7 @@
 package com.techelevator;
 
 import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class Application {
 
@@ -12,24 +13,32 @@ public class Application {
 	public void run() {
 
 
-		//do amazing stuff here!
 
-		//Read in file
-		FileReader readInitial = new FileReader();
+		boolean isOn = true;
+
 		Inventory inventory = new Inventory();
 
 
-        try {
-            readInitial.readInventoryFile();
-        } catch (FileNotFoundException e) {
-			//Move to UI
-			System.out.println("Unable to access vending machine items. Come back later.");
-        }
-        //Move file data into data object
+
+
 		//Call UI to print prompt
 		//Take in user input
 		//Do something based on user input
 		//Return to main menu/exit app
+
+		VendingUI UI = new VendingUI();
+		while(isOn){
+
+			UI.printStartMenu();
+			myScanner.nextLine();
+
+			UI.printMenu();
+			myScanner.nextLine();
+
+			//Call Print Menu
+
+			//Take User Choice
+		}
 
 
 	}
