@@ -25,28 +25,24 @@ public class FileReader{
                 //Instantiate new Item for new line
                 for (int i = 0; i < lineItem.length; i++) {
                     if (lineItem[3].equalsIgnoreCase("chip")){
-                        ItemClass chips = new ChipsClass(lineItem[0],lineItem[1],Double.parseDouble(lineItem[2]),lineItem[3]);
-                        map.put(lineItem[0], chips);
+                        ItemClass chip = new ChipsClass(lineItem[0],lineItem[1],Double.parseDouble(lineItem[2]),lineItem[3]);
+                        map.put(lineItem[0], chip);
                     }
                     else if (lineItem[3].equalsIgnoreCase("gum")){
                         ItemClass gum = new GumClass(lineItem[0],lineItem[1],Double.parseDouble(lineItem[2]),lineItem[3]);
-                        inventory.addItemToInventory(lineItem[1],gum);
+                        map.put(lineItem[0],gum);
                     }
                     else if (lineItem[3].equalsIgnoreCase("candy")){
                         ItemClass candy = new CandyClass(lineItem[0],lineItem[1],Double.parseDouble(lineItem[2]),lineItem[3]);
-                        inventory.addItemToInventory(lineItem[1],candy);
+                        map.put(lineItem[0],candy);
                     }
                     else if (lineItem[3].equalsIgnoreCase("drink")){
                         ItemClass drink = new BeveragesClass(lineItem[0],lineItem[1],Double.parseDouble(lineItem[2]),lineItem[3]);
-                        inventory.addItemToInventory(lineItem[1],drink);
+                        map.put(lineItem[0],drink);
                     }
                 }
-//                    if
-                //populate based on line read using constructor
-
-
             }
-            return inventory;
+            return map;
         } catch (Exception e){
             throw new FileNotFoundException();
         }

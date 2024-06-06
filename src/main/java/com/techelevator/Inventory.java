@@ -1,6 +1,7 @@
 package com.techelevator;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -9,6 +10,7 @@ public class Inventory {
     //Make Item Class
     private Map<String, ItemClass> inventory;
 
+    private List<ItemClass> inventoryList = new ArrayList<>();
     private FileReader fileReader;
 
 
@@ -26,21 +28,12 @@ public class Inventory {
     }
 
 
-
-
-
-    public ItemClass addItemToInventory(String name, ItemClass item) {
-        return inventory.put(name, item);
-    }
-
-
    public List<ItemClass> retrieveItems(){
-        //Key entry to list
-       //Call when option one is chosen
-       return null;
+        for(Map.Entry<String, ItemClass> item : inventory.entrySet()){
+            inventoryList.add(item.getValue());
+        }
+       return inventoryList;
    }
-
-
 
 
 

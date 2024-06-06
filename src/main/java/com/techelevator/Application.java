@@ -17,10 +17,7 @@ public class Application {
 		boolean isOn = true;
 
 		Inventory inventory = new Inventory();
-
-
-
-
+		
 		//Call UI to print prompt
 		//Take in user input
 		//Do something based on user input
@@ -30,10 +27,10 @@ public class Application {
 		while(isOn){
 
 			UI.printStartMenu();
-			myScanner.nextLine();
 
-			UI.printMenu();
-			myScanner.nextLine();
+
+			UI.printMenu(inventory);
+
 
 			//Call Print Menu
 
