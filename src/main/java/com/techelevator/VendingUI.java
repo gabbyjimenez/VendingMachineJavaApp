@@ -20,10 +20,18 @@ public class VendingUI {
             System.out.printf("\n %s %s %.2f %d",i.getSlotId(), i.getNameOfItem(), i.getPriceOfItem(), i.getQuantityOfItem());
 
         }
+        System.out.println("\n");
 
 
-        myScanner.nextLine();
+
     }
+
+    public String getItemToPurchase(){
+         String itemSlotId = myScanner.nextLine();
+         return itemSlotId;
+
+    }
+
     public String printPurchaseMenu(){
         System.out.println("(1) Feed Money");
         System.out.println("(2) Select Product");

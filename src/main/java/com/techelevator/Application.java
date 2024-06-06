@@ -19,6 +19,7 @@ public class Application {
 		VendingUI UI = new VendingUI();
 		CashRegister cashRegister = new CashRegister();
 
+
 		//Call UI to print prompt
 		//Take in user input
 		//Do something based on user input
@@ -31,9 +32,16 @@ public class Application {
 				UI.printMenu(inventory);
 			} else if (userInput.equals("2")) {
 				while (true) {
+					PurchaseMenu purchaseMenu = new PurchaseMenu();
 					userInput = UI.printPurchaseMenu();
-
-					if (userInput.equals("3")) {
+					if(userInput.equals("1")){
+						System.out.println("feed me money");
+					}
+					else if(userInput.equals("2")){
+						UI.printMenu(inventory);
+						UI.getItemToPurchase();
+					}
+					else if (userInput.equals("3")) {
 						break;
 					}
 				}

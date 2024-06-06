@@ -6,14 +6,11 @@ public class CashRegister {
     //CONSTRUCTOR
     public CashRegister(){};
     //METHODS
-    public double addFunds(String insertedMoney){
+    public double addToBalance(int insertedMoney){
+        //REMOVE PARSING
 
-        int insertedMoneyAsInteger = Integer.parseInt(insertedMoney);
-        if(insertedMoneyAsInteger > 0){
-            return totalBalance += insertedMoneyAsInteger;
-        }
+            return totalBalance += insertedMoney;
 
-        return totalBalance;
     }
 
     //GETTER
