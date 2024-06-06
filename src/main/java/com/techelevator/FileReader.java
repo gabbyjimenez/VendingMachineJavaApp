@@ -16,8 +16,10 @@ public class FileReader{
                 //System.out.println(listItem);
                 //TODO: Put this into the map;
                 String[] lineItem = listItem.split("\\|");
+
+                //Instantiate new Item for new line
                 for(String item : lineItem){
-                    //Create object based on line read
+                    //populate based on line read using constructor
 
                 }
             }
