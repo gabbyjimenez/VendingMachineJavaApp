@@ -5,7 +5,8 @@ public class GumClass extends ItemClass{
         super(slotId, nameOfItem, priceOfItem, itemType);
     }
 
-
-
+    public String toString() {
+       return "Chew Chew, Yum!";
+    }
 
 }

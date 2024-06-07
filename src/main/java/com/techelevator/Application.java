@@ -30,51 +30,56 @@ public class Application {
 		while (isOn) {
 			String userInput = UI.printStartMenu();
 			if (userInput.equals("1")) {
-				UI.printMenu(inventory.retrieveItems());
+				UI.printItems(inventory.retrieveItems());
 			} else if (userInput.equals("2")) {
-				userInput = UI.printPurchaseMenu();
+
 				while (true) {
+					userInput = UI.printPurchaseMenu(cashRegister.getTotalBalance());
 					if(userInput.equals("1")){
-						userInput = UI.printMoneyInsertionMenu();
-						cashRegister.addToBalance(userInput);
+						String amount = UI.printMoneyInsertionMenu();
+						cashRegister.addToBalance(amount);
 					}
 					else if(userInput.equals("2")){
-						userInput = UI.printPurchaseMenu();
-						UI.printMenu(inventory.retrieveItems());
+
+
+//						userInput = UI.printPurchaseMenu();
+						UI.printItems(inventory.retrieveItems());
+
+
 						while (true){
-							UI.printBalance(cashRegister.getTotalBalance());
-							userInput = UI.getItemToPurchase();
-							makePurchase(UI.getItemToPurchase(), inventory.retrieveItems(), cashRegister);
+//							UI.printBalance(cashRegister.getTotalBalance());
+							String order = UI.getItemToPurchase();
+							makePurchase(order, inventory.retrieveItems(),cashRegister, UI);
+							break;
 						}
 					}
 					else if (userInput.equals("3")) {
-						break;
+					return;
+
 					}
 				}
-
-
-				//Call Print Menu
-
-				//Take User Choice3
 			}
-
 			if (userInput.equals("3")) {
 				isOn = false;
 			}
 		}
 	}
 
-	public void makePurchase(String userInput, List<ItemClass> inventoryList, CashRegister register){
+	public void makePurchase(String userInput, List<ItemClass> inventoryList, CashRegister register,VendingUI toString){
 		String slotIdAndQuantity = userInput;
 		String[] splitIdAndQuantity = slotIdAndQuantity.split(" ");
 
-		for(ItemClass item : inventoryList){
-				if (splitIdAndQuantity[0].equalsIgnoreCase(item.getSlotId())){
+		for(int i= 0; i < Integer.parseInt(splitIdAndQuantity[1]); i++){
+			for (ItemClass item : inventoryList) {
+				if (splitIdAndQuantity[0].equalsIgnoreCase(item.getSlotId())) {
 					register.makePurchase(item.getPriceOfItem());
 					item.quantityReduction(item, Integer.parseInt(splitIdAndQuantity[1]));
+					item.quantityReduction(item,1);
+					toString.printItemMessage(item);
 
 				}
 			}
+		}
 		}
 
 
