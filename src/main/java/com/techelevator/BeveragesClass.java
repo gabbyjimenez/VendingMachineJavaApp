@@ -6,4 +6,9 @@ public class BeveragesClass extends ItemClass{
     }
 
 
+    public String toString(){
+        return "Glug Glug, Yum!";
+    }
+
+
 }

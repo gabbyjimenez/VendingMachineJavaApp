@@ -17,13 +17,18 @@ public class VendingUI {
 
     public void printItems(List<ItemClass> inventoryList){
         for(ItemClass i : inventoryList){
-            System.out.printf("\n %s %s %.2f %d",i.getSlotId(), i.getNameOfItem(), i.getPriceOfItem(), i.getQuantityOfItem());
+            System.out.printf("\n %s %-20s %.2f %d",i.getSlotId(), i.getNameOfItem(), i.getPriceOfItem(), i.getQuantityOfItem());
 
         }
         System.out.println("\n");
 
 
 
+    }
+
+    public void printItemMessage(ItemClass item){
+        System.out.println(item.toString());
+        myScanner.nextLine();
     }
 
 //    public void printBalance(double balance){

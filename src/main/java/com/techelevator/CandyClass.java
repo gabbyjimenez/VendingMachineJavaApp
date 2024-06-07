@@ -6,6 +6,9 @@ public class CandyClass extends ItemClass{
         super(slotId, nameOfItem, priceOfItem, itemType);
 
     }
+    public String toString(){
+        return "Munch Munch, Yum!";
+    }
 
 
 }
