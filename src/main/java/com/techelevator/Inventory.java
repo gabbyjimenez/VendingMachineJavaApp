@@ -14,7 +14,6 @@ public class Inventory {
     private FileReader fileReader;
 
 
-
     public Inventory(){
         fileReader = new FileReader();
         try {
@@ -26,6 +25,7 @@ public class Inventory {
         }
 
     }
+
 
 
    public List<ItemClass> retrieveItems(){
