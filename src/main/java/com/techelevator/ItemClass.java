@@ -19,8 +19,8 @@ public abstract class ItemClass {
 //    public abstract String toString();
 
     public void quantityReduction (ItemClass item, int quantity){
-        while (this.getQuantityOfItem() > 0){
-            this.quantityOfItem -= quantity;}
+
+            this.quantityOfItem -= quantity;
     }
 //
 

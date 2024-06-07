@@ -17,8 +17,13 @@ public class VendingUI {
 
     public void printItems(List<ItemClass> inventoryList){
         for(ItemClass i : inventoryList){
-            System.out.printf("\n %s %-20s %.2f %d",i.getSlotId(), i.getNameOfItem(), i.getPriceOfItem(), i.getQuantityOfItem());
 
+            if(i.getQuantityOfItem() <= 0){
+                System.out.printf("\n %s %-20s %.2f %s",i.getSlotId(), i.getNameOfItem(), i.getPriceOfItem(), "SOLD OUT");
+            }
+            else {
+                System.out.printf("\n %s %-20s %.2f %d", i.getSlotId(), i.getNameOfItem(), i.getPriceOfItem(), i.getQuantityOfItem());
+            }
         }
         System.out.println("\n");
 
@@ -28,7 +33,9 @@ public class VendingUI {
 
     public void printItemMessage(ItemClass item){
         System.out.println(item.toString());
-        myScanner.nextLine();
+
+
+
     }
 
     public void insufficientFundsMessage(){
@@ -76,5 +83,8 @@ public class VendingUI {
     public String printMoneyInsertionMenu(){
         System.out.println("Please insert up to 10 dollars. Whole dollars only.");
         return myScanner.nextLine();
+    }
+    public void printChange(String change){
+        System.out.println(change);
     }
 }

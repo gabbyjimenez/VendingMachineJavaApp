@@ -53,7 +53,8 @@ public class Application {
 						}
 					}
 					else if (userInput.equals("3")) {
-					return;
+					UI.printChange(cashRegister.makeChange());
+					break;
 
 					}
 				}
