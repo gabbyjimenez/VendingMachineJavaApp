@@ -15,7 +15,7 @@ public class VendingUI {
         return myScanner.nextLine();
     }
 
-    public void printMenu(List<ItemClass> inventoryList){
+    public void printItems(List<ItemClass> inventoryList){
         for(ItemClass i : inventoryList){
             System.out.printf("\n %s %s %.2f %d",i.getSlotId(), i.getNameOfItem(), i.getPriceOfItem(), i.getQuantityOfItem());
 
@@ -26,10 +26,12 @@ public class VendingUI {
 
     }
 
-    public void printBalance(double balance){
+//    public void printBalance(double balance){
+//
+////        System.out.println("Current balance: $" + balance);
+//
+//    }
 
-        System.out.println("Current balance: $" + balance);
-    }
 
     public String getItemToPurchase(){
 
@@ -40,11 +42,12 @@ public class VendingUI {
 
     }
 
-    public String printPurchaseMenu(){
+    public String printPurchaseMenu(double balance){
         System.out.println("(1) Feed Money");
         System.out.println("(2) Select Product");
         System.out.println("(3) Finish Transaction");
         System.out.println();
+        System.out.println("Current Money Provided: " + balance);
 
 
         return myScanner.nextLine();

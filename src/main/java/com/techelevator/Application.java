@@ -30,25 +30,31 @@ public class Application {
 		while (isOn) {
 			String userInput = UI.printStartMenu();
 			if (userInput.equals("1")) {
-				UI.printMenu(inventory.retrieveItems());
+				UI.printItems(inventory.retrieveItems());
 			} else if (userInput.equals("2")) {
-				userInput = UI.printPurchaseMenu();
+
 				while (true) {
+					userInput = UI.printPurchaseMenu(cashRegister.getTotalBalance());
 					if(userInput.equals("1")){
-						userInput = UI.printMoneyInsertionMenu();
-						cashRegister.addToBalance(userInput);
+						String amount = UI.printMoneyInsertionMenu();
+						cashRegister.addToBalance(amount);
 					}
 					else if(userInput.equals("2")){
-						userInput = UI.printPurchaseMenu();
-						UI.printMenu(inventory.retrieveItems());
+
+
+//						userInput = UI.printPurchaseMenu();
+						UI.printItems(inventory.retrieveItems());
+
+
 						while (true){
-							UI.printBalance(cashRegister.getTotalBalance());
-							userInput = UI.getItemToPurchase();
-							makePurchase(UI.getItemToPurchase(), inventory.retrieveItems(), cashRegister);
+//							UI.printBalance(cashRegister.getTotalBalance());
+							String order = UI.getItemToPurchase();
+							makePurchase(order , inventory.retrieveItems(),cashRegister );
 						}
 					}
 					else if (userInput.equals("3")) {
-						break;
+					return;
+
 					}
 				}
 
@@ -68,9 +74,10 @@ public class Application {
 		String slotIdAndQuantity = userInput;
 		String[] splitIdAndQuantity = slotIdAndQuantity.split(" ");
 
+
 		for(ItemClass item : inventoryList){
 				if (splitIdAndQuantity[0].equalsIgnoreCase(item.getSlotId())){
-					register.makePurchase(item.getPriceOfItem());
+					register.makePurchase(item.getPriceOfItem() * Integer.parseInt(splitIdAndQuantity[1]) );
 					item.quantityReduction(item, Integer.parseInt(splitIdAndQuantity[1]));
 				}
 			}

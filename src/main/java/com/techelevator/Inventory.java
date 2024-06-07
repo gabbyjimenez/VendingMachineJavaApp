@@ -10,7 +10,7 @@ public class Inventory {
     //Make Item Class
     private Map<String, ItemClass> inventory;
 
-    private List<ItemClass> inventoryList = new ArrayList<>();
+
     private FileReader fileReader;
 
 
@@ -31,8 +31,11 @@ public class Inventory {
 
 
    public List<ItemClass> retrieveItems(){
+       List<ItemClass> inventoryList = new ArrayList<>();
+
         for(Map.Entry<String, ItemClass> item : inventory.entrySet()){
             inventoryList.add(item.getValue());
+
         }
        return inventoryList;
    }
