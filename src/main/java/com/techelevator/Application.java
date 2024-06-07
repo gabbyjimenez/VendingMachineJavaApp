@@ -47,7 +47,6 @@ public class Application {
 
 
 						while (true){
-//							UI.printBalance(cashRegister.getTotalBalance());
 							String order = UI.getItemToPurchase();
 							makePurchase(order, inventory.retrieveItems(),cashRegister, UI);
 							break;
@@ -65,25 +64,76 @@ public class Application {
 		}
 	}
 
-	public void makePurchase(String userInput, List<ItemClass> inventoryList, CashRegister register,VendingUI toString){
+	public void makePurchase(String userInput, List<ItemClass> inventoryList, CashRegister register,VendingUI output){
 		String slotIdAndQuantity = userInput;
 		String[] splitIdAndQuantity = slotIdAndQuantity.split(" ");
+		int quantity = Integer.parseInt(splitIdAndQuantity[1]);
+		String slotId = splitIdAndQuantity[0];
+		boolean isFound = false;
 
-		for(int i= 0; i < Integer.parseInt(splitIdAndQuantity[1]); i++){
-			for (ItemClass item : inventoryList) {
-				if (splitIdAndQuantity[0].equalsIgnoreCase(item.getSlotId())) {
-					register.makePurchase(item.getPriceOfItem());
-					item.quantityReduction(item, Integer.parseInt(splitIdAndQuantity[1]));
-					item.quantityReduction(item,1);
-					toString.printItemMessage(item);
-
-				}
+		for (ItemClass item : inventoryList) {
+			if(slotId.equalsIgnoreCase(item.getSlotId())){
+				isFound = true;
+				if (register.getTotalBalance() >= item.getPriceOfItem()) {
+					if(item.getQuantityOfItem() > 0){
+						register.makePurchase(item.getPriceOfItem() * quantity);
+						item.quantityReduction(item, quantity);
+						output.printItemMessage(item);
+						break;
+					} else {
+						output.inventoryOutOfStockMessage();
+							}
+				} else {
+					output.insufficientFundsMessage();
+						}
 			}
 		}
+
+		if(!isFound){
+			output.invalidSlotAndQuantityMessage();
 		}
+
+
+
+
+
+
+
+
+
+
+
+		//Insane loop method
+
+//		for(int i= 0; i < Integer.parseInt(splitIdAndQuantity[1]); i++){
+//			for (ItemClass item : inventoryList) {
+//					if (splitIdAndQuantity[0].equalsIgnoreCase(item.getSlotId())) {
+//						if (register.getTotalBalance() >= item.getPriceOfItem()) {
+//							if(item.getQuantityOfItem() > 0){
+//								register.makePurchase(item.getPriceOfItem());
+//								item.quantityReduction(item, 1);
+//								output.printItemMessage(item);
+//							} else {
+//								output.inventoryOutOfStockMessage();
+//							}
+//						} else {
+//							output.insufficientFundsMessage();
+//						}
+//					} else {
+//						output.invalidSlotAndQuantityMessage();
+//					}
+//				}
+//			}
+		}
+
 
 
 
 
 
 }
+
+
+
+
+

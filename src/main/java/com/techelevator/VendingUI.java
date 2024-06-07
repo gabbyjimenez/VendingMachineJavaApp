@@ -31,12 +31,24 @@ public class VendingUI {
         myScanner.nextLine();
     }
 
+    public void insufficientFundsMessage(){
+        System.out.println("Insufficient balance. Please insert more money.");
+        System.out.println("\n");
+    }
+
+    public void inventoryOutOfStockMessage(){
+        System.out.println("This item is out of stock. Please choose a different item.");
+        System.out.println("\n");
+    }
 //    public void printBalance(double balance){
 //
 ////        System.out.println("Current balance: $" + balance);
 //
 //    }
-
+    public void invalidSlotAndQuantityMessage(){
+        System.out.println("Please enter a valid item slot and quantity.");
+        System.out.println("\n");
+    }
 
     public String getItemToPurchase(){
 
