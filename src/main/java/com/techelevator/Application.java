@@ -17,7 +17,7 @@ public class Application {
 		boolean isOn = true;
 
 		Inventory inventory = new Inventory();
-		
+
 		//Call UI to print prompt
 		//Take in user input
 		//Do something based on user input
