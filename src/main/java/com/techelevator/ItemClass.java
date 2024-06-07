@@ -17,6 +17,10 @@ public abstract class ItemClass {
     }
 
 //    public abstract String toString();
+
+    public void quantityReduction (ItemClass item, int quantity){
+       this.quantityOfItem -= quantity;
+    }
 //
 
     public String getSlotId() {
@@ -38,4 +42,10 @@ public abstract class ItemClass {
     public int getQuantityOfItem() {
         return quantityOfItem;
     }
+
+    public void setQuantityOfItem(int quantityOfItem) {
+        this.quantityOfItem = quantityOfItem;
+    }
+
+
 }

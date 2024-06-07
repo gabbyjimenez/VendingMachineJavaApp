@@ -1,6 +1,7 @@
 package com.techelevator;
 
 import java.io.FileNotFoundException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Application {
@@ -16,10 +17,9 @@ public class Application {
 		boolean isOn = true;
 
 		Inventory inventory = new Inventory();
-
 		VendingUI UI = new VendingUI();
 		CashRegister cashRegister = new CashRegister();
-
+		//List<ItemClass> inventoryList = inventory.retrieveItems();
 
 		//Call UI to print prompt
 		//Take in user input
@@ -30,17 +30,22 @@ public class Application {
 		while (isOn) {
 			String userInput = UI.printStartMenu();
 			if (userInput.equals("1")) {
-				UI.printMenu(inventory);
+				UI.printMenu(inventory.retrieveItems());
 			} else if (userInput.equals("2")) {
+				userInput = UI.printPurchaseMenu();
 				while (true) {
-					PurchaseMenu purchaseMenu = new PurchaseMenu();
-					userInput = UI.printPurchaseMenu();
 					if(userInput.equals("1")){
-						System.out.println("feed me money");
+						userInput = UI.printMoneyInsertionMenu();
+						cashRegister.addToBalance(userInput);
 					}
 					else if(userInput.equals("2")){
-						UI.printMenu(inventory);
-						UI.getItemToPurchase();
+						userInput = UI.printPurchaseMenu();
+						UI.printMenu(inventory.retrieveItems());
+						while (true){
+							UI.printBalance(cashRegister.getTotalBalance());
+							userInput = UI.getItemToPurchase();
+							makePurchase(UI.getItemToPurchase(), inventory.retrieveItems(), cashRegister);
+						}
 					}
 					else if (userInput.equals("3")) {
 						break;
@@ -58,4 +63,21 @@ public class Application {
 			}
 		}
 	}
+
+	public void makePurchase(String userInput, List<ItemClass> inventoryList, CashRegister register){
+		String slotIdAndQuantity = userInput;
+		String[] splitIdAndQuantity = slotIdAndQuantity.split(" ");
+
+		for(ItemClass item : inventoryList){
+				if (splitIdAndQuantity[0].equalsIgnoreCase(item.getSlotId())){
+					register.makePurchase(item.getPriceOfItem());
+					item.quantityReduction(item, Integer.parseInt(splitIdAndQuantity[1]));
+				}
+			}
+		}
+
+
+
+
+
 }
