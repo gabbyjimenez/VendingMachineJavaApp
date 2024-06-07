@@ -72,6 +72,7 @@ public class Application {
 				if (splitIdAndQuantity[0].equalsIgnoreCase(item.getSlotId())){
 					register.makePurchase(item.getPriceOfItem());
 					item.quantityReduction(item, Integer.parseInt(splitIdAndQuantity[1]));
+
 				}
 			}
 		}
