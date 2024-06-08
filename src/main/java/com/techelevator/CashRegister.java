@@ -36,36 +36,20 @@ public class CashRegister {
         String change = "";
         int totalQuarters = 0;
         int totalDimes = 0;
-        int totalNickles = 0;
+        int totalNickels = 0;
         int totalInPennies = (int)(totalBalance * 100);
-        while(totalInPennies>0){
-            if (totalInPennies % 25 == 0) {
-                change += " quarter ";
-                totalQuarters += 1;
-                totalInPennies -= 25;
-            }
+
+            totalQuarters = totalInPennies/25;
+            totalInPennies = totalInPennies % 25;
+            totalDimes = totalInPennies / 10;
+            totalInPennies = totalInPennies % 10;
+            totalNickels = totalInPennies / 5;
 
 
-            if (totalInPennies % 10 == 0) {
-                change += " dime ";
-
-                totalDimes += 1;
-                totalInPennies -= 10;
-
-            }
-            if (totalInPennies % 5 == 0) {
-                change += " nickle ";
-                totalNickles += 1;
-                totalInPennies -= 5;
+            totalBalance = 0;
 
 
-            }
-
-
-
-        }
-        totalBalance = 0;
-        return "Your change is: "  + String.valueOf(totalQuarters ) + " quarters " + String.valueOf(totalDimes ) + " dimes " + String.valueOf(totalNickles ) + " nickles ";
+            return "Your change is: "  + String.valueOf(totalQuarters) + " Quarters, " + String.valueOf(totalDimes) + " Dimes, " + String.valueOf(totalNickels) + " Nickels.";
     }
 
 

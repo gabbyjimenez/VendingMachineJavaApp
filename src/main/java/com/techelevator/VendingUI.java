@@ -26,16 +26,10 @@ public class VendingUI {
             }
         }
         System.out.println("\n");
-
-
-
     }
 
     public void printItemMessage(ItemClass item){
         System.out.println(item.toString());
-
-
-
     }
 
     public void insufficientFundsMessage(){
@@ -47,23 +41,16 @@ public class VendingUI {
         System.out.println("This item is out of stock. Please choose a different item.");
         System.out.println("\n");
     }
-//    public void printBalance(double balance){
-//
-////        System.out.println("Current balance: $" + balance);
-//
-//    }
+
     public void invalidSlotAndQuantityMessage(){
         System.out.println("Please enter a valid item slot and quantity.");
         System.out.println("\n");
     }
 
     public String getItemToPurchase(){
-
         System.out.println("Please enter an item number, and the quantity, separated by a space.");
         String itemToPurchase = myScanner.nextLine();
         return itemToPurchase;
-
-
     }
 
     public String printPurchaseMenu(double balance){
@@ -72,12 +59,7 @@ public class VendingUI {
         System.out.println("(3) Finish Transaction");
         System.out.println();
         System.out.println("Current Money Provided: " + balance);
-
-
         return myScanner.nextLine();
-
-
-
     }
 
     public String printMoneyInsertionMenu(){
@@ -87,4 +69,22 @@ public class VendingUI {
     public void printChange(String change){
         System.out.println(change);
     }
+
+    public void printSalesReport(List<ItemClass> itemList){
+        double totalSales = 0.00;
+        for(ItemClass i : itemList){
+            System.out.println(i.getNameOfItem() + "|" + (10 - i.getQuantityOfItem()));
+            totalSales += ((10 - i.getQuantityOfItem()) * i.getPriceOfItem());
+        }
+        System.out.println("\n");
+        System.out.println("**TOTAL SALES** $" + totalSales);
+        System.out.println("\n");
+
+    }
+
+
+
+
+
+
 }

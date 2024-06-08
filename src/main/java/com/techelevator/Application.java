@@ -1,6 +1,7 @@
 package com.techelevator;
 
 import java.io.FileNotFoundException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Scanner;
 
@@ -34,17 +35,14 @@ public class Application {
 			} else if (userInput.equals("2")) {
 
 				while (true) {
-					userInput = UI.printPurchaseMenu(cashRegister.getTotalBalance());
-					if(userInput.equals("1")){
+					String menuInput = UI.printPurchaseMenu(cashRegister.getTotalBalance());
+					if(menuInput.equals("1")){
 						String amount = UI.printMoneyInsertionMenu();
 						cashRegister.addToBalance(amount);
 					}
-					else if(userInput.equals("2")){
+					else if(menuInput.equals("2")){
 
-
-//						userInput = UI.printPurchaseMenu();
 						UI.printItems(inventory.retrieveItems());
-
 
 						while (true){
 							String order = UI.getItemToPurchase();
@@ -52,7 +50,7 @@ public class Application {
 							break;
 						}
 					}
-					else if (userInput.equals("3")) {
+					else if (menuInput.equals("3")) {
 					UI.printChange(cashRegister.makeChange());
 					break;
 
@@ -61,6 +59,9 @@ public class Application {
 			}
 			if (userInput.equals("3")) {
 				isOn = false;
+			}
+			if(userInput.equals("4")){
+				UI.printSalesReport(inventory.retrieveItems());
 			}
 		}
 	}
