@@ -14,7 +14,6 @@ public class CashRegister {
     //METHODS
 
     public double addToBalance(String insertedMoney) throws InvalidInputException{
-        //REMOVE PARSING
         try {
             int fundsAddedInt = Integer.parseInt(insertedMoney);
             if (fundsAddedInt > 0 && fundsAddedInt <= 10) {
@@ -27,16 +26,13 @@ public class CashRegister {
 
     }
 
-    public double makePurchase(double itemPrice) {
-        //REMOVE PARSING
+    public double removeItemFromBalance(double itemPrice) {
        if (itemPrice <= totalBalance){
            totalBalance -= itemPrice;
 
        }
         return totalBalance;
     }
-
-    //GETTER
 
     public double getTotalBalance() {
         return totalBalance;
@@ -62,21 +58,16 @@ public class CashRegister {
     public String addFundsLog(String amount) throws InvalidInputException{
 
         double fundsAdded = Double.parseDouble(amount);
-
-
         return "FEED MONEY: $" + toString(fundsAdded) + " $" + toString(totalBalance);
 
     }
     public String addChangeToLog(double amount){
 
         double changeGiven = amount;
-
-
         return "GIVE CHANGE: $" + toString(changeGiven) + " $" + toString(totalBalance - changeGiven);
 
     }
     public String addPurchaseToLog(String name,String slotId,double price){
-
 
             return name + " " +  slotId.toUpperCase() + " " + " $" + toString(price) + " $" + toString(totalBalance);
 
@@ -86,5 +77,7 @@ public class CashRegister {
         return formattedNumber;
     }
 
-
+    public void setTotalBalance(double totalBalance) {
+        this.totalBalance = totalBalance;
+    }
 }

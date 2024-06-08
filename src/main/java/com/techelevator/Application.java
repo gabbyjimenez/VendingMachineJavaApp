@@ -16,7 +16,6 @@ public class Application {
 
 	public void run() {
 
-
 		boolean isOn = true;
 		VendingUI UI = new VendingUI();
 		CashRegister cashRegister = new CashRegister();
@@ -49,9 +48,9 @@ public class Application {
 							String order = UI.getItemToPurchase();
 							String condition = "[A-Za-z][1-9]\\s[0-9]+";
 							Pattern pattern = Pattern.compile(condition);
-							Matcher match = pattern.matcher(order);
+							Matcher vendingSlotInput = pattern.matcher(order);
 							try {
-								if(match.matches()){
+								if(vendingSlotInput.matches()){
 									makePurchase(order, inventory.retrieveItems(),cashRegister, UI, logWriter);
 									break;
 								}
@@ -92,11 +91,10 @@ public class Application {
 			for (ItemClass item : inventoryList) {
 				if (slotId.equalsIgnoreCase(item.getSlotId())) {
 					isFound = true;
-					if (register.getTotalBalance() >= item.getPriceOfItem()) {
+					if (register.getTotalBalance() >= item.getPriceOfItem() * quantity) {
 						for (int i = 0; i < quantity; i++) {
 						if (item.getQuantityOfItem() > 0 && item.getQuantityOfItem() <= 10) {
-
-								register.makePurchase(item.getPriceOfItem());
+								register.removeItemFromBalance(item.getPriceOfItem());
 								item.quantityReduction(item, 1);
 								output.printItemMessage(item);
 								purchaseWriter.writeToLog(register.addPurchaseToLog(item.getNameOfItem(), slotId, item.getPriceOfItem()));

@@ -10,10 +10,7 @@ public class Inventory {
     //Make Item Class
     private Map<String, ItemClass> inventory;
 
-
     private FileReader fileReader;
-
-
 
 
     public Inventory(){
@@ -36,9 +33,6 @@ public class Inventory {
         }
        return inventoryList;
    }
-
-
-
 
 
 }
