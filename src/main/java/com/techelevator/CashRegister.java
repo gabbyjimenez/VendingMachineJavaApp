@@ -1,5 +1,8 @@
 package com.techelevator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CashRegister {
     // CLASS VARIABLES
     private double totalBalance = 0.00;
@@ -29,5 +32,25 @@ public class CashRegister {
     public double getTotalBalance() {
         return totalBalance;
     }
+    public String makeChange(){
+        String change = "";
+        int totalQuarters = 0;
+        int totalDimes = 0;
+        int totalNickels = 0;
+        int totalInPennies = (int)(totalBalance * 100);
+
+            totalQuarters = totalInPennies/25;
+            totalInPennies = totalInPennies % 25;
+            totalDimes = totalInPennies / 10;
+            totalInPennies = totalInPennies % 10;
+            totalNickels = totalInPennies / 5;
+
+
+            totalBalance = 0;
+
+
+            return "Your change is: "  + String.valueOf(totalQuarters) + " Quarters, " + String.valueOf(totalDimes) + " Dimes, " + String.valueOf(totalNickels) + " Nickels.";
+    }
+
 
 }
