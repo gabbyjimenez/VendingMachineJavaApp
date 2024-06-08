@@ -1,5 +1,6 @@
 package com.techelevator;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -7,6 +8,7 @@ import java.util.Locale;
 public class CashRegister {
     // CLASS VARIABLES
     private double totalBalance = 0.00;
+
     //CONSTRUCTOR
     public CashRegister(){};
     //METHODS
@@ -16,7 +18,7 @@ public class CashRegister {
         try {
             int fundsAddedInt = Integer.parseInt(insertedMoney);
             if (fundsAddedInt > 0 && fundsAddedInt <= 10) {
-                totalBalance += (double) fundsAddedInt;
+               totalBalance += (double) fundsAddedInt;
             }
             return totalBalance;
         } catch (Exception e) {
@@ -52,9 +54,7 @@ public class CashRegister {
             totalInPennies = totalInPennies % 10;
             totalNickels = totalInPennies / 5;
 
-
             totalBalance = 0;
-
 
             return "Your change is: "  + String.valueOf(totalQuarters) + " Quarters, " + String.valueOf(totalDimes) + " Dimes, " + String.valueOf(totalNickels) + " Nickels.";
     }

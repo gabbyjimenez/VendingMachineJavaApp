@@ -17,8 +17,6 @@ public class Application {
 	public void run() {
 
 
-
-
 		boolean isOn = true;
 		VendingUI UI = new VendingUI();
 		CashRegister cashRegister = new CashRegister();
