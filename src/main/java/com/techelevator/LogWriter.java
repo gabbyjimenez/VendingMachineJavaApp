@@ -14,7 +14,7 @@ public class LogWriter {
     public void writeToLog(String logEntry) {
 
         File logFile = new File(fileName);
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss A");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm:ss a");
         LocalDateTime now = LocalDateTime.now();
         String formattedDate = dateTimeFormatter.format(now);
 

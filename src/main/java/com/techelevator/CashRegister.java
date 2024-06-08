@@ -2,6 +2,7 @@ package com.techelevator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class CashRegister {
     // CLASS VARIABLES
@@ -23,6 +24,7 @@ public class CashRegister {
         //REMOVE PARSING
        if (itemPrice <= totalBalance){
            totalBalance -= itemPrice;
+
        }
         return totalBalance;
     }
@@ -55,8 +57,28 @@ public class CashRegister {
     public String addFundsLog(String amount){
 
         double fundsAdded = Double.parseDouble(amount);
-        return "FEED MONEY: " + fundsAdded + " " + totalBalance;
 
+
+        return "FEED MONEY: $" + toString(fundsAdded) + " $" + toString(totalBalance);
+
+    }
+    public String addChangeToLog(double amount){
+
+        double changeGiven = amount;
+
+
+        return "GIVE CHANGE: $" + toString(changeGiven) + " $" + toString(totalBalance - changeGiven);
+
+    }
+    public String addPurchaseToLog(String name,String slotId,double price){
+
+
+            return name + " " +  slotId.toUpperCase() + " " + " $" + toString(price) + " $" + toString(totalBalance);
+
+    }
+    public String toString(Double doubleNum){
+        String formattedNumber = String.format("%.2f",doubleNum);
+        return formattedNumber;
     }
 
 

@@ -40,12 +40,16 @@ public class Application {
 
 						while (true){
 							String order = UI.getItemToPurchase();
-							makePurchase(order, inventory.retrieveItems(),cashRegister, UI);
+							makePurchase(order, inventory.retrieveItems(),cashRegister, UI, logWriter);
+
 							break;
+
 						}
 					}
 					else if (menuInput.equals("3")) {
-					UI.printChange(cashRegister.makeChange());
+						logWriter.writeToLog(cashRegister.addChangeToLog(cashRegister.getTotalBalance()));
+						UI.printChange(cashRegister.makeChange());
+
 					break;
 
 					}
@@ -61,7 +65,7 @@ public class Application {
 	}
 
 
-	public void makePurchase(String userInput, List<ItemClass> inventoryList, CashRegister register,VendingUI output){
+	public void makePurchase(String userInput, List<ItemClass> inventoryList, CashRegister register,VendingUI output,LogWriter purchaseWriter){
 
 		String slotIdAndQuantity = userInput;
 		String[] splitIdAndQuantity = slotIdAndQuantity.split(" ");
@@ -74,9 +78,17 @@ public class Application {
 				isFound = true;
 				if (register.getTotalBalance() >= item.getPriceOfItem()) {
 					if(item.getQuantityOfItem() > 0){
-						register.makePurchase(item.getPriceOfItem() * quantity);
-						item.quantityReduction(item, quantity);
+
+						for (int i = 0; i < quantity; i++) {
+						register.makePurchase(item.getPriceOfItem());
+						item.quantityReduction(item, 1);
 						output.printItemMessage(item);
+						purchaseWriter.writeToLog(register.addPurchaseToLog(item.getNameOfItem(),slotId, item.getPriceOfItem()));
+
+						}
+
+
+
 						break;
 					} else {
 						output.inventoryOutOfStockMessage();
