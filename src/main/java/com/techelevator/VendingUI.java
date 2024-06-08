@@ -87,7 +87,10 @@ public class VendingUI {
     }
 
 
-
+    public void printInvalidInputErrorMessage(){
+        System.out.println("Invalid input. Please try again.");
+        System.out.println("\n");
+    }
 
 
 

@@ -11,13 +11,18 @@ public class CashRegister {
     public CashRegister(){};
     //METHODS
 
-    public double addToBalance(String insertedMoney) {
+    public double addToBalance(String insertedMoney) throws InvalidInputException{
         //REMOVE PARSING
-        int fundsAddedInt = Integer.parseInt(insertedMoney);
-        if (fundsAddedInt > 0 && fundsAddedInt <= 10) {
-            totalBalance += (double) fundsAddedInt;
+        try {
+            int fundsAddedInt = Integer.parseInt(insertedMoney);
+            if (fundsAddedInt > 0 && fundsAddedInt <= 10) {
+                totalBalance += (double) fundsAddedInt;
+            }
+            return totalBalance;
+        } catch (Exception e) {
+            throw new InvalidInputException();
         }
-        return totalBalance;
+
     }
 
     public double makePurchase(double itemPrice) {
@@ -54,7 +59,7 @@ public class CashRegister {
             return "Your change is: "  + String.valueOf(totalQuarters) + " Quarters, " + String.valueOf(totalDimes) + " Dimes, " + String.valueOf(totalNickels) + " Nickels.";
     }
 
-    public String addFundsLog(String amount){
+    public String addFundsLog(String amount) throws InvalidInputException{
 
         double fundsAdded = Double.parseDouble(amount);
 

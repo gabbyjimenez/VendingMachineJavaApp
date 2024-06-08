@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Application {
 
@@ -13,6 +15,8 @@ public class Application {
 	}
 
 	public void run() {
+
+
 
 
 		boolean isOn = true;
@@ -31,8 +35,13 @@ public class Application {
 					String menuInput = UI.printPurchaseMenu(cashRegister.getTotalBalance());
 					if(menuInput.equals("1")){
 						String amount = UI.printMoneyInsertionMenu();
-						cashRegister.addToBalance(amount);
-						logWriter.writeToLog(cashRegister.addFundsLog(amount));
+                        try {
+                            cashRegister.addToBalance(amount);
+							logWriter.writeToLog(cashRegister.addFundsLog(amount));
+                        } catch (InvalidInputException e) {
+                           UI.printInvalidInputErrorMessage();
+                        }
+
 					}
 					else if(menuInput.equals("2")){
 
@@ -40,9 +49,17 @@ public class Application {
 
 						while (true){
 							String order = UI.getItemToPurchase();
-							makePurchase(order, inventory.retrieveItems(),cashRegister, UI, logWriter);
-
-							break;
+							String condition = "[A-Za-z][1-9]\\s[0-9]+";
+							Pattern pattern = Pattern.compile(condition);
+							Matcher match = pattern.matcher(order);
+							try {
+								if(match.matches()){
+									makePurchase(order, inventory.retrieveItems(),cashRegister, UI, logWriter);
+									break;
+								}
+							} catch (InvalidInputException e) {
+								UI.printInvalidInputErrorMessage();
+							}
 
 						}
 					}
@@ -65,45 +82,44 @@ public class Application {
 	}
 
 
-	public void makePurchase(String userInput, List<ItemClass> inventoryList, CashRegister register,VendingUI output,LogWriter purchaseWriter){
+	public void makePurchase(String userInput, List<ItemClass> inventoryList, CashRegister register,VendingUI output,LogWriter purchaseWriter) throws InvalidInputException {
 
 		String slotIdAndQuantity = userInput;
+
+
 		String[] splitIdAndQuantity = slotIdAndQuantity.split(" ");
 		int quantity = Integer.parseInt(splitIdAndQuantity[1]);
 		String slotId = splitIdAndQuantity[0];
 		boolean isFound = false;
+			for (ItemClass item : inventoryList) {
+				if (slotId.equalsIgnoreCase(item.getSlotId())) {
+					isFound = true;
+					if (register.getTotalBalance() >= item.getPriceOfItem()) {
+						if (item.getQuantityOfItem() > 0) {
+							for (int i = 0; i < quantity; i++) {
+								register.makePurchase(item.getPriceOfItem());
+								item.quantityReduction(item, 1);
+								output.printItemMessage(item);
+								purchaseWriter.writeToLog(register.addPurchaseToLog(item.getNameOfItem(), slotId, item.getPriceOfItem()));
 
-		for (ItemClass item : inventoryList) {
-			if(slotId.equalsIgnoreCase(item.getSlotId())){
-				isFound = true;
-				if (register.getTotalBalance() >= item.getPriceOfItem()) {
-					if(item.getQuantityOfItem() > 0){
-
-						for (int i = 0; i < quantity; i++) {
-						register.makePurchase(item.getPriceOfItem());
-						item.quantityReduction(item, 1);
-						output.printItemMessage(item);
-						purchaseWriter.writeToLog(register.addPurchaseToLog(item.getNameOfItem(),slotId, item.getPriceOfItem()));
-
-						}
-
-
-
-						break;
-					} else {
-						output.inventoryOutOfStockMessage();
 							}
-				} else {
-					output.insufficientFundsMessage();
-						}
-			}
-		}
-		if(!isFound){
-			output.invalidSlotAndQuantityMessage();
-		}
 
+
+							break;
+						} else {
+							output.inventoryOutOfStockMessage();
+						}
+					} else {
+						output.insufficientFundsMessage();
+					}
+				}
+			}
+			if (!isFound) {
+				output.invalidSlotAndQuantityMessage();
+			}
+
+	}
 }
-		}
 
 
 
