@@ -95,20 +95,19 @@ public class Application {
 				if (slotId.equalsIgnoreCase(item.getSlotId())) {
 					isFound = true;
 					if (register.getTotalBalance() >= item.getPriceOfItem()) {
-						if (item.getQuantityOfItem() > 0) {
-							for (int i = 0; i < quantity; i++) {
+						for (int i = 0; i < quantity; i++) {
+						if (item.getQuantityOfItem() > 0 && item.getQuantityOfItem() <= 10) {
+
 								register.makePurchase(item.getPriceOfItem());
 								item.quantityReduction(item, 1);
 								output.printItemMessage(item);
 								purchaseWriter.writeToLog(register.addPurchaseToLog(item.getNameOfItem(), slotId, item.getPriceOfItem()));
 
-							}
-
-
-							break;
-						} else {
+							} else {
 							output.inventoryOutOfStockMessage();
+							}
 						}
+						break;
 					} else {
 						output.insufficientFundsMessage();
 					}
