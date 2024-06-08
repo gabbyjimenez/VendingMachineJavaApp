@@ -82,6 +82,10 @@ public class VendingUI {
 
     }
 
+    public void fileNotFoundErrorMessage(){
+        System.out.println("Unable to access vending machine items. Come back later.");
+    }
+
 
 
 

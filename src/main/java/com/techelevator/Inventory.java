@@ -22,12 +22,9 @@ public class Inventory {
             inventory = fileReader.readInventoryFile();
 
         } catch (FileNotFoundException e) {
-            //Move to UI
-            System.out.println("Unable to access vending machine items. Come back later.");
+
         }
-
     }
-
 
 
    public List<ItemClass> retrieveItems(){

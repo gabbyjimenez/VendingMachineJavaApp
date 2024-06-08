@@ -52,5 +52,12 @@ public class CashRegister {
             return "Your change is: "  + String.valueOf(totalQuarters) + " Quarters, " + String.valueOf(totalDimes) + " Dimes, " + String.valueOf(totalNickels) + " Nickels.";
     }
 
+    public String addFundsLog(String amount){
+
+        double fundsAdded = Double.parseDouble(amount);
+        return "FEED MONEY: " + fundsAdded + " " + totalBalance;
+
+    }
+
 
 }

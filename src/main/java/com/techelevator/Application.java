@@ -16,17 +16,10 @@ public class Application {
 
 
 		boolean isOn = true;
-
-		Inventory inventory = new Inventory();
 		VendingUI UI = new VendingUI();
 		CashRegister cashRegister = new CashRegister();
-		//List<ItemClass> inventoryList = inventory.retrieveItems();
-
-		//Call UI to print prompt
-		//Take in user input
-		//Do something based on user input
-		//Return to main menu/exit app
-
+		LogWriter logWriter = new LogWriter();
+		Inventory inventory = new Inventory();
 
 		while (isOn) {
 			String userInput = UI.printStartMenu();
@@ -39,6 +32,7 @@ public class Application {
 					if(menuInput.equals("1")){
 						String amount = UI.printMoneyInsertionMenu();
 						cashRegister.addToBalance(amount);
+						logWriter.writeToLog(cashRegister.addFundsLog(amount));
 					}
 					else if(menuInput.equals("2")){
 
@@ -67,7 +61,6 @@ public class Application {
 	}
 
 
-
 	public void makePurchase(String userInput, List<ItemClass> inventoryList, CashRegister register,VendingUI output){
 
 		String slotIdAndQuantity = userInput;
@@ -93,45 +86,11 @@ public class Application {
 						}
 			}
 		}
-
 		if(!isFound){
 			output.invalidSlotAndQuantityMessage();
 		}
 
-
 }
-
-
-
-
-
-
-
-
-
-
-
-		//Insane loop method
-
-//		for(int i= 0; i < Integer.parseInt(splitIdAndQuantity[1]); i++){
-//			for (ItemClass item : inventoryList) {
-//					if (splitIdAndQuantity[0].equalsIgnoreCase(item.getSlotId())) {
-//						if (register.getTotalBalance() >= item.getPriceOfItem()) {
-//							if(item.getQuantityOfItem() > 0){
-//								register.makePurchase(item.getPriceOfItem());
-//								item.quantityReduction(item, 1);
-//								output.printItemMessage(item);
-//							} else {
-//								output.inventoryOutOfStockMessage();
-//							}
-//						} else {
-//							output.insufficientFundsMessage();
-//						}
-//					} else {
-//						output.invalidSlotAndQuantityMessage();
-//					}
-//				}
-//			}
 		}
 
 
