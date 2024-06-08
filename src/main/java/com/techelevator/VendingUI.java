@@ -79,7 +79,7 @@ public class VendingUI {
             totalSales += ((10 - i.getQuantityOfItem()) * i.getPriceOfItem());
         }
         System.out.println("\n");
-        System.out.println("**TOTAL SALES** $" + totalSales);
+        System.out.printf("**TOTAL SALES** $%.2f", totalSales);
         System.out.println("\n");
 
     }
