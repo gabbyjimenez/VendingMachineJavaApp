@@ -65,7 +65,6 @@ public class Application {
 			}
 		}
 	}
-
 	public void makePurchase(String userInput, List<ItemClass> inventoryList, CashRegister register,VendingUI toString){
 		String slotIdAndQuantity = userInput;
 		String[] splitIdAndQuantity = slotIdAndQuantity.split(" ");
@@ -80,9 +79,5 @@ public class Application {
 			}
 		}
 		}
-
-
-
-
 
 }
