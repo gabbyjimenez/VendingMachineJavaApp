@@ -37,7 +37,7 @@ public class FileReader{
                         map.put(lineItem[0],candy);
                     }
                     else if (lineItem[3].equalsIgnoreCase("drink")){
-                        ItemClass drink = new BeveragesClass(lineItem[0],lineItem[1],Double.parseDouble(lineItem[2]),lineItem[3]);
+                        ItemClass drink = new DrinksClass(lineItem[0],lineItem[1],Double.parseDouble(lineItem[2]),lineItem[3]);
                         map.put(lineItem[0],drink);
                     }
                 }
@@ -47,12 +47,6 @@ public class FileReader{
             throw new FileNotFoundException();
         }
     }
-
-
-
-
-
-
 
 
 

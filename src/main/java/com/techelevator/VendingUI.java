@@ -44,7 +44,7 @@ public class VendingUI {
 
     public void invalidSlotAndQuantityMessage(){
         System.out.println("Please enter a valid item slot and quantity.");
-        System.out.println("\n");
+
     }
 
     public String getItemToPurchase(){
@@ -54,11 +54,13 @@ public class VendingUI {
     }
 
     public String printPurchaseMenu(double balance){
+
         System.out.println("(1) Feed Money");
         System.out.println("(2) Select Product");
         System.out.println("(3) Finish Transaction");
         System.out.println();
-        System.out.println("Current Money Provided: " + balance);
+        System.out.printf("\nCurrent Money Provided: $%.2f", balance);
+        System.out.println("\n");
         return myScanner.nextLine();
     }
 
@@ -77,7 +79,7 @@ public class VendingUI {
             totalSales += ((10 - i.getQuantityOfItem()) * i.getPriceOfItem());
         }
         System.out.println("\n");
-        System.out.println("**TOTAL SALES** $" + totalSales);
+        System.out.printf("**TOTAL SALES** $%.2f", totalSales);
         System.out.println("\n");
 
     }
@@ -91,7 +93,6 @@ public class VendingUI {
         System.out.println("Invalid input. Please try again.");
         System.out.println("\n");
     }
-
 
 
 }

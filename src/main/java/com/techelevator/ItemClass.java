@@ -16,13 +16,9 @@ public abstract class ItemClass {
         this.itemType = itemType;
     }
 
-//    public abstract String toString();
-
-    public void quantityReduction (ItemClass item, int quantity){
-
+    public void quantityReduction(ItemClass item, int quantity){
             this.quantityOfItem -= quantity;
     }
-//
 
     public String getSlotId() {
         return slotId;
@@ -47,6 +43,5 @@ public abstract class ItemClass {
     public void setQuantityOfItem(int quantityOfItem) {
         this.quantityOfItem = quantityOfItem;
     }
-
 
 }

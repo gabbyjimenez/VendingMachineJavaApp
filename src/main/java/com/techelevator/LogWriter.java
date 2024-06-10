@@ -19,7 +19,6 @@ public class LogWriter {
         String formattedDate = dateTimeFormatter.format(now);
 
 
-
         try {
 
             if(!logFile.exists()){
